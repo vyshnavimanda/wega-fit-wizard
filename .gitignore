@@ -55,3 +55,6 @@ frontend.env.example
 
 backend/backend-deploy.zip
 backend/Procfile
+
+backend/backend-deploy.zip
+backend/Procfile
