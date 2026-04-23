@@ -52,3 +52,6 @@ backend/fix_xai.py
 
 # Frontend env example at root
 frontend.env.example
+
+backend/backend-deploy.zip
+backend/Procfile
