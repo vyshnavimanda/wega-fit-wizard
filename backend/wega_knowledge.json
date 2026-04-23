@@ -1,0 +1,198 @@
+{
+  "integrations": {
+    "ci_cd": {
+      "native": ["GitHub Actions", "GitLab CI", "Azure DevOps", "Jenkins", "CircleCI", "Harness"],
+      "custom_connector": ["Bamboo", "TeamCity", "Bitbucket Pipelines"],
+      "blocker": []
+    },
+    "cloud": {
+      "native": ["Azure", "AWS", "GCP"],
+      "custom_connector": ["Oracle Cloud", "IBM Cloud"],
+      "blocker": ["On-premise only (no cloud access)"]
+    },
+    "project_management": {
+      "native": ["Jira", "Azure Boards", "GitHub Issues", "Linear"],
+      "custom_connector": ["ServiceNow", "Rally", "Asana", "Monday.com"],
+      "blocker": []
+    },
+    "source_control": {
+      "native": ["GitHub", "GitLab", "Azure Repos", "Bitbucket"],
+      "custom_connector": ["SVN", "Perforce"],
+      "blocker": []
+    },
+    "security_scanning": {
+      "native": ["Snyk", "SonarQube", "GitHub Advanced Security", "Checkmarx"],
+      "custom_connector": ["Veracode", "Fortify", "Qualys"],
+      "blocker": []
+    },
+    "monitoring": {
+      "native": ["Datadog", "Azure Monitor", "AWS CloudWatch", "Grafana", "Splunk"],
+      "custom_connector": ["Dynatrace", "New Relic", "AppDynamics"],
+      "blocker": []
+    },
+    "communication": {
+      "native": ["Slack", "Microsoft Teams"],
+      "custom_connector": ["Webex", "Google Chat"],
+      "blocker": []
+    },
+    "artifact_registry": {
+      "native": ["GitHub Packages", "Azure Artifacts", "AWS ECR", "JFrog Artifactory", "Docker Hub"],
+      "custom_connector": ["Nexus Repository"],
+      "blocker": []
+    }
+  },
+
+  "wega_agents": [
+    {
+      "id": "code-gen",
+      "name": "Code Generation Agent",
+      "description": "Generates production-ready code from requirements, user stories, or specs",
+      "best_for": ["software-product", "fintech", "healthtech", "ecommerce"],
+      "requires": ["source_control"],
+      "effort": "low",
+      "expected_roi": "high",
+      "sdlc_phase": "development"
+    },
+    {
+      "id": "code-review",
+      "name": "AI Code Review Agent",
+      "description": "Automated code review for quality, style, and best practices",
+      "best_for": ["all"],
+      "requires": ["source_control"],
+      "effort": "low",
+      "expected_roi": "high",
+      "sdlc_phase": "development"
+    },
+    {
+      "id": "test-gen",
+      "name": "Test Generation Agent",
+      "description": "Generates unit, integration, and e2e test cases from code or specs",
+      "best_for": ["all"],
+      "requires": ["source_control", "ci_cd"],
+      "effort": "low",
+      "expected_roi": "high",
+      "sdlc_phase": "testing"
+    },
+    {
+      "id": "security-scan",
+      "name": "Security Analysis Agent",
+      "description": "Deep security scanning for OWASP vulnerabilities, secrets, CVEs",
+      "best_for": ["fintech", "healthcare", "government", "ecommerce"],
+      "requires": ["source_control", "security_scanning"],
+      "effort": "medium",
+      "expected_roi": "very-high",
+      "sdlc_phase": "security"
+    },
+    {
+      "id": "infra-provisioning",
+      "name": "Infrastructure Provisioning Agent",
+      "description": "AI-driven IaC generation and cloud resource provisioning",
+      "best_for": ["cloud-native", "platform-engineering"],
+      "requires": ["cloud"],
+      "effort": "medium",
+      "expected_roi": "medium",
+      "sdlc_phase": "infrastructure"
+    },
+    {
+      "id": "release-mgmt",
+      "name": "Release Management Agent",
+      "description": "Orchestrates deployments, rollbacks, and release gates",
+      "best_for": ["all"],
+      "requires": ["ci_cd", "source_control"],
+      "effort": "medium",
+      "expected_roi": "high",
+      "sdlc_phase": "release"
+    },
+    {
+      "id": "requirements",
+      "name": "Requirements Analysis Agent",
+      "description": "Converts business requirements into structured technical specs and user stories",
+      "best_for": ["enterprise", "consulting", "government"],
+      "requires": ["project_management"],
+      "effort": "low",
+      "expected_roi": "medium",
+      "sdlc_phase": "design"
+    },
+    {
+      "id": "incident-response",
+      "name": "Incident Response Agent",
+      "description": "AI-powered incident detection, triage, and resolution guidance",
+      "best_for": ["fintech", "healthcare", "ecommerce", "telecommunications"],
+      "requires": ["monitoring"],
+      "effort": "medium",
+      "expected_roi": "very-high",
+      "sdlc_phase": "operations"
+    },
+    {
+      "id": "doc-gen",
+      "name": "Documentation Generation Agent",
+      "description": "Auto-generates API docs, runbooks, architecture docs from code and specs",
+      "best_for": ["all"],
+      "requires": ["source_control"],
+      "effort": "low",
+      "expected_roi": "medium",
+      "sdlc_phase": "development"
+    },
+    {
+      "id": "data-pipeline",
+      "name": "Data Pipeline Agent",
+      "description": "Builds and validates data ingestion and transformation pipelines",
+      "best_for": ["analytics", "fintech", "healthcare", "retail"],
+      "requires": ["cloud"],
+      "effort": "high",
+      "expected_roi": "high",
+      "sdlc_phase": "development"
+    }
+  ],
+
+  "compliance_map": {
+    "HIPAA": {
+      "cloud_requirements": ["Azure", "AWS", "GCP"],
+      "required_agents": ["security-scan"],
+      "data_residency": "US only",
+      "notes": "PHI must not leave compliant cloud boundary. Audit logging mandatory."
+    },
+    "SOC2": {
+      "cloud_requirements": ["Azure", "AWS", "GCP"],
+      "required_agents": ["security-scan", "code-review"],
+      "data_residency": "flexible",
+      "notes": "Change management controls, access logging, and audit trails required."
+    },
+    "GDPR": {
+      "cloud_requirements": ["Azure", "AWS", "GCP"],
+      "required_agents": ["security-scan"],
+      "data_residency": "EU only",
+      "notes": "Data processing must remain within EU. Right to erasure must be implemented."
+    },
+    "PCI-DSS": {
+      "cloud_requirements": ["Azure", "AWS"],
+      "required_agents": ["security-scan", "code-review"],
+      "data_residency": "flexible",
+      "notes": "Network segmentation required. Cardholder data environment must be isolated."
+    },
+    "FedRAMP": {
+      "cloud_requirements": ["Azure Government", "AWS GovCloud"],
+      "required_agents": ["security-scan", "code-review", "incident-response"],
+      "data_residency": "US Government cloud only",
+      "notes": "Requires FedRAMP-authorized cloud environment. Significant compliance overhead."
+    }
+  },
+
+  "team_size_guidance": {
+    "small": {
+      "range": "1-20",
+      "recommended_start": ["code-review", "test-gen", "doc-gen"],
+      "notes": "Start with low-effort, high-ROI agents. Avoid heavy orchestration overhead."
+    },
+    "medium": {
+      "range": "21-100",
+      "recommended_start": ["code-review", "test-gen", "security-scan", "release-mgmt"],
+      "notes": "Can handle parallel agent workstreams. Focus on velocity and quality gates."
+    },
+    "large": {
+      "range": "100+",
+      "recommended_start": ["requirements", "code-gen", "code-review", "test-gen", "security-scan", "release-mgmt"],
+      "notes": "Full SDLC orchestration recommended. Invest in custom connector development."
+    }
+  }
+}

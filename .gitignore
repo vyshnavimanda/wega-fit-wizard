@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# Environment variables — NEVER commit API keys
+.env
+backend/.env
+frontend/.env.local
+frontend/.env.production
+
+# Vector database — rebuilds automatically on startup
+backend/chroma_db/
+backend/chroma_history/
+chroma_db/
+chroma_history/
+
+# Node / React
+frontend/node_modules/
+node_modules/
+frontend/build/
+build/
+
+# Debug / fix scripts — not part of project
+backend/fix_groq.py
+backend/fix_model.py
+backend/fix_xai.py
+
+# Python cache
+backend/__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
+
+# Old unused files
+backend/agents.py
+backend/fix_xai.py
+
+# Frontend env example at root
+frontend.env.example
