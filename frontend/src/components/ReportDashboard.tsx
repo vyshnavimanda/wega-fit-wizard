@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import ExportReport from './ExportReport';
-import { WegaFitReport } from '../types';
+import { CoreFitReport } from '../types';
 
-interface Props { report: WegaFitReport; }
+interface Props { report: CoreFitReport; }
 type Tab = 'overview' | 'compatibility' | 'agents' | 'risks' | 'roadmap';
 
 const SEVERITY_COLOR: Record<string, string> = { high: 'risk-high', medium: 'risk-medium', low: 'risk-low' };
@@ -194,7 +194,7 @@ export default function ReportDashboard({ report }: Props) {
         {/* AGENTS */}
         {tab === 'agents' && (
           <div>
-            <div className="section-label">Recommended WEGA Agents — Ranked by Priority</div>
+            <div className="section-label">Recommended CORE Agents — Ranked by Priority</div>
             {recommendations.recommendations?.map(agent => (
               <div key={agent.agent_id} className="agent-card">
                 <div className="agent-card-header">

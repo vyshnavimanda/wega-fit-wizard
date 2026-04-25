@@ -1,8 +1,8 @@
 """
-RAG Store — WEGA Knowledge Base as a Vector Database
+RAG Store — CORE Knowledge Base as a Vector Database
 -----------------------------------------------------
 Uses ChromaDB with Google Gemini embeddings (google.genai package).
-Provides semantic search for agents to retrieve relevant WEGA knowledge.
+Provides semantic search for agents to retrieve relevant CORE knowledge.
 """
 
 import json
@@ -11,7 +11,7 @@ import chromadb
 from google import genai as google_genai
 
 CHROMA_PATH = "./chroma_db"
-COLLECTION_NAME = "wega_knowledge"
+COLLECTION_NAME = "core_knowledge"
 
 def get_embeddings(texts: list[str]) -> list[list[float]]:
     """Generate embeddings using Google Gemini embedding model."""
@@ -27,7 +27,7 @@ def get_embeddings(texts: list[str]) -> list[list[float]]:
 
 
 def build_knowledge_documents(knowledge: dict) -> list[dict]:
-    """Convert WEGA knowledge JSON into documents for embedding."""
+    """Convert CORE knowledge JSON into documents for embedding."""
     docs = []
 
     for category, data in knowledge["integrations"].items():
@@ -36,17 +36,17 @@ def build_knowledge_documents(knowledge: dict) -> list[dict]:
             if tools:
                 docs.append({
                     "id": f"integration_{category}_{status}",
-                    "text": f"WEGA {category} integration — {status}: {', '.join(tools)}. "
-                            f"These tools {status.replace('_', ' ')} with WEGA.",
+                    "text": f"CORE {category} integration — {status}: {', '.join(tools)}. "
+                            f"These tools {status.replace('_', ' ')} with CORE.",
                     "metadata": {"type": "integration", "category": category, "status": status}
                 })
 
-    for agent in knowledge["wega_agents"]:
+    for agent in knowledge["core_agents"]:
         best_for = ", ".join(agent.get("best_for", []))
         requires = ", ".join(agent.get("requires", []))
         docs.append({
             "id": f"agent_{agent['id']}",
-            "text": f"WEGA Agent: {agent['name']}. {agent['description']}. "
+            "text": f"CORE Agent: {agent['name']}. {agent['description']}. "
                     f"Best for: {best_for}. Requires: {requires}. "
                     f"Effort: {agent['effort']}. ROI: {agent['expected_roi']}. Phase: {agent['sdlc_phase']}.",
             "metadata": {"type": "agent", "agent_id": agent["id"], "agent_name": agent["name"],
@@ -72,13 +72,13 @@ def build_knowledge_documents(knowledge: dict) -> list[dict]:
 
     constraint_docs = [
         {"id": "constraint_air_gapped",
-         "text": "Air-gapped: No internet. WEGA external API calls fail. Use local model hosting (Ollama/vLLM). Bundle all dependencies offline. Severity HIGH.",
+         "text": "Air-gapped: No internet. CORE external API calls fail. Use local model hosting (Ollama/vLLM). Bundle all dependencies offline. Severity HIGH.",
          "metadata": {"type": "constraint", "constraint": "air-gapped", "severity": "high"}},
         {"id": "constraint_no_install",
          "text": "No install rights: Cannot install packages. Pre-approve package lists with IT admin. Use portable Python or Docker. Severity HIGH.",
          "metadata": {"type": "constraint", "constraint": "no-install-rights", "severity": "high"}},
         {"id": "constraint_on_prem",
-         "text": "On-premise only: No cloud. WEGA runs on client infrastructure. Needs GPU for local models. Severity HIGH.",
+         "text": "On-premise only: No cloud. CORE runs on client infrastructure. Needs GPU for local models. Severity HIGH.",
          "metadata": {"type": "constraint", "constraint": "on-premise-only", "severity": "high"}},
         {"id": "constraint_data_sovereignty",
          "text": "Data sovereignty: Data cannot leave country. No US-based LLM APIs. Use regional endpoints or local models. Severity HIGH.",
@@ -95,7 +95,7 @@ def build_knowledge_documents(knowledge: dict) -> list[dict]:
 
 
 def initialize_vector_store(knowledge: dict):
-    """Build or load ChromaDB vector store with WEGA knowledge."""
+    """Build or load ChromaDB vector store with CORE knowledge."""
     client = chromadb.PersistentClient(path=CHROMA_PATH)
     existing = [c.name for c in client.list_collections()]
 
@@ -136,7 +136,7 @@ def initialize_vector_store(knowledge: dict):
 
 
 def semantic_search(collection, query: str, n_results: int = 5, filter_type: str = None) -> str:
-    """Semantic search over WEGA knowledge base."""
+    """Semantic search over CORE knowledge base."""
     query_embedding = get_embeddings([query])[0]
     where = {"type": filter_type} if filter_type else None
 

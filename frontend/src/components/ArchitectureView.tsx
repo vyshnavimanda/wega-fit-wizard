@@ -13,7 +13,7 @@ export default function ArchitectureView() {
       <div className="arch-diagram-wrap">
         <img
           src="/architecture.svg"
-          alt="WEGA Fit Wizard Architecture Diagram"
+          alt="CORE Fit Wizard Architecture Diagram"
           className="arch-diagram"
         />
       </div>

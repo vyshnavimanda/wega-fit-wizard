@@ -29,7 +29,7 @@ import traceback
 from concurrent.futures import ThreadPoolExecutor
 import threading
 
-app = FastAPI(title="WEGA Fit Wizard API", version="2.0.0")
+app = FastAPI(title="CORE Fit Wizard API", version="2.0.0")
 
 app.add_middleware(
     CORSMiddleware,

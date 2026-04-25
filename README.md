@@ -1,12 +1,12 @@
-# WEGA Fit Wizard
+# CORE Fit Wizard
 
-> A multi-agent system that generates a personalized WEGA deployment plan for any enterprise client — in under 60 seconds.
+> A multi-agent system that generates a personalized CORE deployment plan for any enterprise client — in under 60 seconds.
 
-Built for the Wipro Junior Forward Deployed Engineer assignment. Addresses a real gap in the WEGA deployment workflow: automated client environment assessment before an FDE engagement begins.
+Built for the Wipro Junior Forward Deployed Engineer assignment. Addresses a real gap in the CORE deployment workflow: automated client environment assessment before an FDE engagement begins.
 
-**Live demo:** https://wega-fit-wizard-frontend.onrender.com
-**API endpoint:** https://wega-fit-wizard.onrender.com/health
-**GitHub:** https://github.com/vyshnavimanda/wega-fit-wizard
+**Live demo:** https://core-fit-wizard-frontend.onrender.com
+**API endpoint:** https://core-fit-wizard.onrender.com/health
+**GitHub:** https://github.com/vyshnavimanda/core-fit-wizard
 
 ---
 
@@ -14,8 +14,8 @@ Built for the Wipro Junior Forward Deployed Engineer assignment. Addresses a rea
 
 Enter a client's environment (tech stack, cloud provider, compliance needs, deployment constraints, pain points). Five AI agents run in sequence and produce:
 
-- **Compatibility matrix** — which client tools integrate natively with WEGA, which need custom connectors, and what's a blocker
-- **Ranked agent recommendations** — the 2–5 WEGA agents most relevant to this client, ranked by ROI and effort
+- **Compatibility matrix** — which client tools integrate natively with CORE, which need custom connectors, and what's a blocker
+- **Ranked agent recommendations** — the 2–5 CORE agents most relevant to this client, ranked by ROI and effort
 - **Risk registry** — compliance gaps, deployment constraints, and team readiness concerns rated High/Medium/Low
 - **30/60/90-day roadmap** — phased deployment plan with actions, agents to activate, and success metrics per phase
 - **Executive summary** — C-suite ready paragraph for the first client meeting
@@ -54,7 +54,7 @@ Each agent has a strict system prompt confining it to one role. No agent can exc
 | Orchestration | LangChain LCEL |
 | Vector DB | ChromaDB |
 | Embeddings | Google Gemini embedding-001 |
-| RAG Knowledge Base | 41 WEGA docs (integrations, agents, compliance, constraints) |
+| RAG Knowledge Base | 41 CORE docs (integrations, agents, compliance, constraints) |
 | Streaming | Server-Sent Events (live agent trace) |
 | Frontend | React 18 + TypeScript |
 | Deployment | Render (backend + frontend) |
@@ -67,8 +67,8 @@ Prerequisites: Python 3.10+, Node 18+, Groq API key, Gemini API key
 
 ```bash
 # Clone
-git clone https://github.com/vyshnavimanda/wega-fit-wizard.git
-cd wega-fit-wizard
+git clone https://github.com/vyshnavimanda/core-fit-wizard.git
+cd core-fit-wizard
 
 # Backend
 cd backend
@@ -92,7 +92,7 @@ npm start
 ## Project structure
 
 ```
-wega-fit-wizard/
+core-fit-wizard/
 ├── backend/
 │   ├── main.py              # FastAPI app — SSE streaming + pipeline orchestration
 │   ├── agents_v2.py         # All 5 agents (LangChain LCEL + RAG)
@@ -100,7 +100,7 @@ wega-fit-wizard/
 │   ├── rag_store.py         # ChromaDB vector store + Gemini embeddings
 │   ├── history_store.py     # Assessment history persistence
 │   ├── models.py            # Pydantic data models
-│   ├── wega_knowledge.json  # 41 WEGA knowledge documents
+│   ├── core_knowledge.json  # 41 CORE knowledge documents
 │   └── .env.example         # Environment variables template
 ├── frontend/
 │   └── src/

@@ -45,7 +45,7 @@ class RoadmapPhase(BaseModel):
     agents_to_activate: List[str]
     success_metric: str
 
-class WegaFitReport(BaseModel):
+class CoreFitReport(BaseModel):
     client_profile: dict
     compatibility_matrix: List[CompatibilityItem]
     overall_compatibility_score: int

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ClientIntakeForm, WegaFitReport } from './types';
+import { ClientIntakeForm, CoreFitReport } from './types';
 import IntakeForm from './components/IntakeForm';
 import ReportDashboard from './components/ReportDashboard';
 import Dashboard from './components/Dashboard';
@@ -12,7 +12,7 @@ type AppView = 'form' | 'trace' | 'report' | 'dashboard' | 'prompts' | 'architec
 
 export default function App() {
   const [view, setView] = useState<AppView>('form');
-  const [report, setReport] = useState<WegaFitReport | null>(null);
+  const [report, setReport] = useState<CoreFitReport | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [pendingForm, setPendingForm] = useState<ClientIntakeForm | null>(null);
 
@@ -22,7 +22,7 @@ export default function App() {
     setView('trace');
   };
 
-  const handleTraceComplete = (r: WegaFitReport) => {
+  const handleTraceComplete = (r: CoreFitReport) => {
     setReport(r);
     setTimeout(() => setView('report'), 800);
   };
@@ -56,7 +56,7 @@ export default function App() {
           <div className="logo-group">
             <div className="logo-icon">W</div>
             <div>
-              <div className="logo-title">WEGA Fit Wizard</div>
+              <div className="logo-title">CORE Fit Wizard</div>
               <div className="logo-sub">Client Deployment Intelligence · v2</div>
             </div>
           </div>

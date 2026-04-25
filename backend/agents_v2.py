@@ -20,7 +20,7 @@ from models import ClientIntakeForm
 from rag_store import initialize_vector_store, semantic_search
 from tracer import PipelineTracer, AgentTrace
 
-with open("wega_knowledge.json") as f:
+with open("core_knowledge.json") as f:
     KNOWLEDGE = json.load(f)
 
 print("⚙ Initializing RAG vector store...")
@@ -102,7 +102,7 @@ def agent1_discovery_parser(form: ClientIntakeForm, tracer: PipelineTracer = Non
         docs = parse_rag_docs(constraint_context)
         tracer.emit_rag(trace, f"deployment constraints: {form.deployment_constraints}", docs)
 
-    template = """You are the Discovery Parser Agent for WEGA, Wipro's agentic AI platform.
+    template = """You are the Discovery Parser Agent for CORE, Wipro's agentic AI platform.
 Your ONLY job: parse the intake form into a clean structured JSON profile.
 
 Constraint reference knowledge:
@@ -182,7 +182,7 @@ def agent2_stack_compatibility(client_profile: dict, tracer: PipelineTracer = No
     all_tools = []
     for tools in client_profile.get("tools", {}).values():
         all_tools.extend(tools)
-    query = f"WEGA integration {' '.join(all_tools)} {client_profile.get('cloud_provider', '')}"
+    query = f"CORE integration {' '.join(all_tools)} {client_profile.get('cloud_provider', '')}"
 
     integration_context = semantic_search(VECTOR_STORE, query, n_results=8, filter_type="integration")
     constraints = client_profile.get("deployment_constraint_tags", [])
@@ -196,12 +196,12 @@ def agent2_stack_compatibility(client_profile: dict, tracer: PipelineTracer = No
 
     if tracer and trace:
         docs = parse_rag_docs(integration_context)
-        tracer.emit_rag(trace, f"WEGA integrations for: {', '.join(all_tools[:5])}", docs)
+        tracer.emit_rag(trace, f"CORE integrations for: {', '.join(all_tools[:5])}", docs)
 
-    template = """You are the Stack Compatibility Agent for WEGA, Wipro's agentic AI platform.
-Your ONLY job: assess compatibility of client tools against WEGA integrations.
+    template = """You are the Stack Compatibility Agent for CORE, Wipro's agentic AI platform.
+Your ONLY job: assess compatibility of client tools against CORE integrations.
 
-WEGA Integration Knowledge (RAG):
+CORE Integration Knowledge (RAG):
 {integration_context}
 
 Deployment Constraint Impacts:
@@ -256,7 +256,7 @@ def agent3_use_case_matcher(client_profile: dict, compatibility: dict, tracer: P
     trace = tracer.start_agent(3, "Use Case Matcher") if tracer else None
 
     query = (
-        f"WEGA agents {client_profile.get('industry','')} "
+        f"CORE agents {client_profile.get('industry','')} "
         f"{client_profile.get('cloud_provider','')} "
         f"team {client_profile.get('team_size_bucket','')} "
         f"{' '.join(client_profile.get('pain_point_tags',[]))}"
@@ -270,12 +270,12 @@ def agent3_use_case_matcher(client_profile: dict, compatibility: dict, tracer: P
 
     if tracer and trace:
         docs = parse_rag_docs(agent_context)
-        tracer.emit_rag(trace, f"WEGA agents for {client_profile.get('industry')} {client_profile.get('team_size_bucket')} team", docs)
+        tracer.emit_rag(trace, f"CORE agents for {client_profile.get('industry')} {client_profile.get('team_size_bucket')} team", docs)
 
-    template = """You are the Use Case Matcher Agent for WEGA, Wipro's agentic AI platform.
-Your ONLY job: recommend the 3-5 best WEGA agents for this specific client.
+    template = """You are the Use Case Matcher Agent for CORE, Wipro's agentic AI platform.
+Your ONLY job: recommend the 3-5 best CORE agents for this specific client.
 
-Relevant WEGA Agents (RAG):
+Relevant CORE Agents (RAG):
 {agent_context}
 
 Team Size Guidance (RAG):
@@ -349,7 +349,7 @@ def agent4_risk_flagger(client_profile: dict, compatibility: dict, tracer: Pipel
         if constraints and constraints != ["none"]:
             tracer.emit_finding(trace, f"⚠ Analyzing {len(constraints)} deployment constraint(s) for FDE impact")
 
-    template = """You are the Risk Flagger Agent for WEGA, Wipro's agentic AI platform.
+    template = """You are the Risk Flagger Agent for CORE, Wipro's agentic AI platform.
 Your ONLY job: identify ALL deployment risks for this client.
 
 Compliance Knowledge (RAG):
@@ -477,7 +477,7 @@ def agent5_roadmap_orchestrator(
 
     constraints = client_profile.get("deployment_constraint_tags", [])
 
-    template = """You are the Roadmap Orchestrator Agent for WEGA, Wipro's agentic AI platform.
+    template = """You are the Roadmap Orchestrator Agent for CORE, Wipro's agentic AI platform.
 Synthesize all agent outputs into a 30/60/90-day deployment roadmap.
 
 Team Guidance (RAG):

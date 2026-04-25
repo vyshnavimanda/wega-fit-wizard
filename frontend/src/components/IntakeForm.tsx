@@ -114,10 +114,10 @@ export default function IntakeForm({ onSubmit }: Props) {
     <div className="form-page">
       <div className="form-hero">
         <div className="form-hero-badge">5-Agent Pipeline</div>
-        <h1 className="form-hero-title">WEGA Deployment Assessment</h1>
+        <h1 className="form-hero-title">CORE Deployment Assessment</h1>
         <p className="form-hero-sub">
           Enter your client's environment details. Our 5-agent system will analyze compatibility,
-          recommend the right WEGA agents, identify risks, and generate a personalized deployment roadmap.
+          recommend the right CORE agents, identify risks, and generate a personalized deployment roadmap.
         </p>
         <div className="sample-buttons">
           <button type="button" className="btn-sample" onClick={() => loadSample(SAMPLE_STANDARD)}>
@@ -208,7 +208,7 @@ export default function IntakeForm({ onSubmit }: Props) {
           </div>
           <p className="constraints-hint">
             Select all constraints that apply to this client's environment. These directly affect
-            how WEGA agents are deployed and what risks the FDE will face on day one.
+            how CORE agents are deployed and what risks the FDE will face on day one.
           </p>
           <div className="constraints-grid">
             {CONSTRAINT_OPTIONS.map((opt) => {
@@ -241,7 +241,7 @@ export default function IntakeForm({ onSubmit }: Props) {
             <textarea rows={3} placeholder="e.g. Slow deployments, security vulnerabilities found late..." value={form.current_pain_points} onChange={(e) => set('current_pain_points', e.target.value)} />
           </div>
           <div className="form-field">
-            <label>Primary Goal with WEGA</label>
+            <label>Primary Goal with CORE</label>
             <textarea rows={2} placeholder="e.g. Increase deployment frequency, reduce security incidents..." value={form.primary_goal} onChange={(e) => set('primary_goal', e.target.value)} />
           </div>
         </div>

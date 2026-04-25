@@ -28,9 +28,9 @@ const AGENTS = [
     name: "Stack Compatibility",
     color: "#534AB7",
     bg: "#EEEDFE",
-    role: "Compares client toolchain against WEGA's integration catalog",
+    role: "Compares client toolchain against CORE's integration catalog",
     rag_type: "integration",
-    rag_query: "WEGA integration {client_tools} {cloud_provider}",
+    rag_query: "CORE integration {client_tools} {cloud_provider}",
     prompt_summary: "Retrieves only the integration docs relevant to the client's specific tools via semantic search. Classifies each tool as native, custom_connector, or blocker. Downgrades cloud-dependent tools if air-gapped constraint detected.",
     output_shape: `{
   "compatibility_matrix": [{
@@ -44,17 +44,17 @@ const AGENTS = [
   "blocker_count": number,
   "confidence_score": number
 }`,
-    guardrail: "Agent can ONLY assess compatibility — role constraint prevents it from making recommendations. Output is validated against known WEGA integration catalog."
+    guardrail: "Agent can ONLY assess compatibility — role constraint prevents it from making recommendations. Output is validated against known CORE integration catalog."
   },
   {
     num: 3,
     name: "Use Case Matcher",
     color: "#1D9E75",
     bg: "#E1F5EE",
-    role: "Recommends best WEGA agents ranked by ROI and effort",
+    role: "Recommends best CORE agents ranked by ROI and effort",
     rag_type: "agent",
-    rag_query: "WEGA agents {industry} {team_size} {pain_points}",
-    prompt_summary: "Semantic search finds the most relevant WEGA agents for this client's industry and pain points. Only recommends agents whose required tools are native or custom_connector in the compatibility matrix. Prioritizes offline-capable agents for constrained environments.",
+    rag_query: "CORE agents {industry} {team_size} {pain_points}",
+    prompt_summary: "Semantic search finds the most relevant CORE agents for this client's industry and pain points. Only recommends agents whose required tools are native or custom_connector in the compatibility matrix. Prioritizes offline-capable agents for constrained environments.",
     output_shape: `{
   "recommendations": [{
     "agent_name": string,

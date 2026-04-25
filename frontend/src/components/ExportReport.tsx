@@ -25,7 +25,7 @@ export default function ExportReport({ report }: Props) {
 <html>
 <head>
 <meta charset="utf-8"/>
-<title>WEGA Fit Report — ${client_profile.company_name}</title>
+<title>CORE Fit Report — ${client_profile.company_name}</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1a1a18; background: #fff; font-size: 13px; }
@@ -110,7 +110,7 @@ export default function ExportReport({ report }: Props) {
     <div class="logo">
       <div class="logo-icon">W</div>
       <div>
-        <div class="logo-text">WEGA Fit Wizard</div>
+        <div class="logo-text">CORE Fit Wizard</div>
         <div class="logo-sub">Client Deployment Intelligence · v2</div>
       </div>
     </div>
@@ -208,7 +208,7 @@ export default function ExportReport({ report }: Props) {
 
   <!-- Agent Recommendations -->
   <div class="section">
-    <div class="section-title">Recommended WEGA Agents</div>
+    <div class="section-title">Recommended CORE Agents</div>
     ${recommendations.recommendations?.map((agent: any) => `
       <div class="agent-card">
         <div class="agent-header">
@@ -258,7 +258,7 @@ export default function ExportReport({ report }: Props) {
 
   <!-- Footer -->
   <div class="footer">
-    <div>WEGA Fit Wizard — Client Deployment Intelligence · Powered by RAG + LangChain + ChromaDB</div>
+    <div>CORE Fit Wizard — Client Deployment Intelligence · Powered by RAG + LangChain + ChromaDB</div>
     <div>Wipro · ${new Date().getFullYear()}</div>
   </div>
 

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { ClientIntakeForm, WegaFitReport } from '../types';
+import { ClientIntakeForm, CoreFitReport } from '../types';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
@@ -26,15 +26,15 @@ interface ConflictData {
 }
 interface Props {
   form: ClientIntakeForm;
-  onComplete: (report: WegaFitReport) => void;
+  onComplete: (report: CoreFitReport) => void;
   onError: (msg: string) => void;
 }
 
 const AGENT_COLORS = ['#185FA5','#534AB7','#1D9E75','#993C1D','#854F0B'];
 const AGENT_DESCRIPTIONS = [
   'Parsing client environment + querying constraint knowledge base',
-  'Comparing toolchain against WEGA integration catalog via RAG',
-  'Matching WEGA agents to client pain points via semantic search',
+  'Comparing toolchain against CORE integration catalog via RAG',
+  'Matching CORE agents to client pain points via semantic search',
   'Scanning for compliance, integration, and FDE deployment risks',
   'Synthesizing all outputs into a phased deployment roadmap',
 ];

@@ -47,7 +47,7 @@ export interface RoadmapPhase {
   success_metric: string;
 }
 
-export interface WegaFitReport {
+export interface CoreFitReport {
   client_profile: any;
   compatibility: {
     compatibility_matrix: CompatibilityItem[];
